@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  
+  <!-- Ícono: Etiqueta de precio en negro -->
+  <g id="price-tag">
+    <!-- Cuerpo de la etiqueta -->
+    <path d="M 55 30 L 25 60 L 55 90 L 95 90 L 125 60 L 95 30 Z" 
+          fill="none" 
+          stroke="#000000" 
+          stroke-width="7" 
+          stroke-linejoin="round" 
+          stroke-linecap="round"/>
+    <!-- Orificio de la etiqueta -->
+    <circle cx="105" cy="48" r="7" fill="#000000"/>
+  </g>
+
+  <!-- Triángulos decorativos -->
+  <g id="triangles">
+    <!-- Triángulo azul -->
+    <polygon points="80,85 60,120 95,120" fill="#0099DD"/>
+    <!-- Triángulo rojo -->
+    <polygon points="110,85 95,120 125,120" fill="#E63946"/>
+  </g>
+
+  <!-- Texto principal: mallcv -->
+  <g id="brand-name" transform="translate(145, 95)">
+    <!-- "mall" en negro -->
+    <text x="0" y="0" 
+          font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" 
+          font-size="72" 
+          font-weight="800" 
+          fill="#000000" 
+          letter-spacing="-2">mall</text>
+    <!-- "cv" en azul -->
+    <text x="162" y="0" 
+          font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" 
+          font-size="72" 
+          font-weight="800" 
+          fill="#0099DD" 
+          letter-spacing="-2">cv</text>
+  </g>
+
+  <!-- Tagline: Todo en el mismo lugar -->
+  <text x="147" y="128" 
+        font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" 
+        font-size="18" 
+        font-weight="400" 
+        fill="#555555" 
+        letter-spacing="0.5">Todo en el mismo lugar</text>
+
+</svg>
