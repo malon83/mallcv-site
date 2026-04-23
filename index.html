@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Listados diarios de precios en tecnología - MallCV">
+  <meta name="keywords" content="tecnología, precios, ofertas, laptops, componentes">
+  <meta name="author" content="MallCV">
+  <meta property="og:title" content="MallCV - Precios en Tecnología">
+  <meta property="og:description" content="Encuentra los mejores precios en productos tecnológicos actualizados diariamente.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.mallcv.com">
+  <meta property="og:image" content="https://www.mallcv.com/assets/logo.svg">
+  <title>MallCV | Precios en Tecnología</title>
+  
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-primary: #2563eb;
+      --color-primary-dark: #1d4ed8;
+      --color-secondary: #0f172a;
+      --color-bg: #f8fafc;
+      --color-card: #ffffff;
+      --color-border: #e2e8f0;
+      --color-success: #10b981;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --radius: 12px;
+      --transition: all 0.2s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-secondary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      background: var(--color-card);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-secondary); font-weight: 700; font-size: 1.25rem; }
+    .logo-img { width: 40px; height: 40px; object-fit: contain; }
+    .last-update { font-size: 0.875rem; color: #64748b; text-align: right; }
+    .hero { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; text-align: center; }
+    .hero h1 { font-size: clamp(1.5rem, 5vw, 2.25rem); font-weight: 700; margin-bottom: 0.75rem; color: var(--color-secondary); }
+    .hero p { color: #64748b; max-width: 600px; margin: 0 auto 1.5rem; }
+    .search-box { max-width: 500px; margin: 0 auto 2rem; position: relative; }
+    .search-box input { width: 100%; padding: 0.875rem 1.25rem; padding-left: 2.75rem; border: 1px solid var(--color-border); border-radius: var(--radius); font-size: 1rem; background: var(--color-card); transition: var(--transition); }
+    .search-box input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+    .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none; }
+    .products-container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+    .category-section { margin-bottom: 2.5rem; }
+    .category-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-border);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .product-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .product-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+    .product-name { font-weight: 600; font-size: 1.05rem; color: var(--color-secondary); line-height: 1.4; }
+    .product-price { font-size: 1.65rem; font-weight: 700; color: var(--color-success); margin: 0.25rem 0; }
+    .share-btn {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      justify-content: center;
+    }
+    .share-btn:hover { background: var(--color-primary-dark); }
+    .share-btn svg { width: 16px; height: 16px; }
+    .empty-state, .loading, .error { text-align: center; padding: 3rem 1.5rem; color: #64748b; }
+    .error { background: #fef2f2; border: 1px solid #fecaca; border-radius: var(--radius); color: #b91c1c; margin: 1rem 1.5rem; }
+    .stats-bar { max-width: 1200px; margin: 0 auto 1rem; padding: 0 1.5rem; display: flex; gap: 1.5rem; font-size: 0.875rem; color: #64748b; flex-wrap: wrap; }
+    footer { background: var(--color-secondary); color: #cbd5e1; text-align: center; padding: 1.5rem; font-size: 0.875rem; margin-top: auto; }
+    footer a { color: white; text-decoration: none; }
+    @media (max-width: 640px) {
+      .header-content { flex-direction: column; text-align: center; }
+      .last-update { text-align: center; }
+      .category-grid { grid-template-columns: 1fr; }
+      .product-price { font-size: 1.5rem; }
+      .stats-bar { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">
+        <img src="assets/logo.svg" alt="MallCV" class="logo-img" onerror="this.style.display='none'">
+        <span>MallCV</span>
+      </a>
+      <div class="last-update">Actualizado: <time id="updateDate"></time></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Precios en Tecnología</h1>
+      <p>Encuentra las mejores ofertas en laptops, componentes y accesorios. Actualizado diariamente.</p>
+      
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchInput" placeholder="Buscar producto o categoría..." aria-label="Buscar producto">
+      </div>
+    </section>
+
+    <div class="stats-bar">
+      <span id="productsCount">Cargando...</span>
+      <span id="lastFetch">Última carga: --:--</span>
+    </div>
+
+    <div class="products-container" id="productsContainer">
+      <div class="loading">🔄 Actualizando listados...</div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> MallCV. Todos los derechos reservados.</p>
+    <p><a href="https://www.mallcv.com" target="_blank">www.mallcv.com</a> | <a href="https://www.mallcv.com.co" target="_blank">www.mallcv.com.co</a></p>
+  </footer>
+
+  <script>
+    // ===== CONFIGURACIÓN =====
+    const MARKUP_PERCENT = 0.30;
+    const CURRENCY = 'COP';
+    const LOCALE = 'es-CO';
+    const PRODUCTS_FILE = 'products.txt';
+
+    // ===== UTILIDADES =====
+    const formatPrice = (price) => 
+      new Intl.NumberFormat(LOCALE, { style: 'currency', currency: CURRENCY, minimumFractionDigits: 0 }).format(price);
+
+    const formatDate = (date) => 
+      new Intl.DateTimeFormat(LOCALE, { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(date);
+
+    // Elimina emojis y limpia espacios extra
+    function removeEmojis(str) {
+      return str.replace(/[\u{1F000}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{200D}\u{20E3}\u{1F1E0}-\u{1F1FF}]/gu, '').replace(/\s+/g, ' ').trim();
+    }
+
+    // ===== PARSER INTELIGENTE =====
+    function parseProductsFile(text) {
+      const lines = text.split('\n');
+      const products = [];
+      let currentCategory = 'OTROS';
+      
+      // Regex para precio: $ seguido de dígitos con posible apóstrofe como separador de miles
+      const priceRegex = /\$(\d{1,3}(?:’\d{3})*(?:\.\d+)?)/;
+      // Regex para detectar títulos de categoría (mayúsculas, sin $, longitud mínima)
+      const categoryRegex = /^[A-ZÁÉÍÓÚÑ\s&\-\.\/,]{3,}$/;
+
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (!line) continue;
+
+        const priceMatch = line.match(priceRegex);
+        
+        if (priceMatch) {
+          // Es un producto
+          const priceRaw = priceMatch[1].replace(/’/g, '');
+          const basePrice = parseFloat(priceRaw);
+          if (isNaN(basePrice) || basePrice <= 0) continue;
+
+          const name = removeEmojis(line.split('$')[0].trim());
+          if (name.length < 3) continue;
+
+          products.push({ category: currentCategory, name, basePrice });
+        } else {
+          // Podría ser categoría o nota
+          const cleanLine = removeEmojis(line);
+          if (!line.startsWith('(') && !line.includes('$') && categoryRegex.test(cleanLine)) {
+            currentCategory = cleanLine;
+          }
+          // Ignora comentarios, notas entre paréntesis y líneas sin $ que no son categorías
+        }
+      }
+      return products;
+    }
+
+    // ===== RENDERIZADO =====
+    function renderProducts(products, searchTerm = '') {
+      const container = document.getElementById('productsContainer');
+      const filtered = searchTerm 
+        ? products.filter(p => p.name.toLowerCase().includes(searchTerm) || p.category.toLowerCase().includes(searchTerm))
+        : products;
+
+      document.getElementById('productsCount').textContent = `${filtered.length} producto${filtered.length !== 1 ? 's' : ''} encontrado${filtered.length !== 1 ? 's' : ''}`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="empty-state"><p>😕 No se encontraron coincidencias.</p></div>`;
+        return;
+      }
+
+      // Agrupar por categoría
+      const grouped = {};
+      filtered.forEach(p => {
+        if (!grouped[p.category]) grouped[p.category] = [];
+        grouped[p.category].push(p);
+      });
+
+      let html = '';
+      for (const [category, items] of Object.entries(grouped)) {
+        html += `<section class="category-section">
+          <h2 class="category-title">${category}</h2>
+          <div class="category-grid">`;
+          
+        items.forEach(product => {
+          const finalPrice = Math.round(product.basePrice * (1 + MARKUP_PERCENT));
+          const shareText = encodeURIComponent(`🔥 ${product.name}\n💰 ${formatPrice(finalPrice)}\n👉 ${window.location.href}`);
+          
+          html += `<article class="product-card" itemscope itemtype="https://schema.org/Product">
+            <h3 class="product-name" itemprop="name">${product.name}</h3>
+            <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <span itemprop="price">${formatPrice(finalPrice)}</span>
+              <meta itemprop="priceCurrency" content="${CURRENCY}">
+              <meta itemprop="price" content="${finalPrice}">
+              <meta itemprop="availability" content="https://schema.org/InStock">
+            </div>
+            <a href="https://wa.me/?text=${shareText}" target="_blank" rel="noopener" class="share-btn" aria-label="Compartir por WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004c-1.732 0-3.465-.522-4.93-1.494C4.69 18.72 3 16.04 3 13.04c0-.57.08-1.13.23-1.67.53-1.92 1.77-3.58 3.47-4.67C8.4 5.62 10.44 5 12.54 5c.52 0 1.04.04 1.55.12 1.88.3 3.56 1.24 4.84 2.68 1.28 1.44 2.02 3.24 2.08 5.14.01.26.01.52 0 .78-.1 2.44-1.34 4.68-3.38 6.08-1.74 1.2-3.8 1.84-5.9 1.84z"/></svg>
+              Compartir
+            </a>
+          </article>`;
+        });
+        html += `</div></section>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function showError(message) {
+      document.getElementById('productsContainer').innerHTML = `
+        <div class="error">
+          <strong>⚠️ Error al cargar productos</strong><br>
+          <small>${message}</small><br><br>
+          <a href="${PRODUCTS_FILE}?v=${Date.now()}" target="_blank" style="color:#2563eb;text-decoration:none">Ver archivo products.txt →</a>
+        </div>
+      `;
+    }
+
+    // ===== CARGA Y BÚSQUEDA =====
+    async function loadProducts() {
+      const container = document.getElementById('productsContainer');
+      container.innerHTML = '<div class="loading">🔄 Actualizando listados...</div>';
+      
+      try {
+        const response = await fetch(`${PRODUCTS_FILE}?v=${Date.now()}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const text = await response.text();
+        const products = parseProductsFile(text);
+        
+        if (products.length === 0) throw new Error('No se encontraron productos válidos');
+        
+        document.getElementById('lastFetch').textContent = `Última carga: ${formatDate(new Date()).split(', ').pop()}`;
+        renderProducts(products);
+        setupSearch(products);
+      } catch (error) {
+        console.error(error);
+        showError(`No se pudo cargar ${PRODUCTS_FILE}. Verifica formato.`);
+      }
+    }
+
+    function setupSearch(products) {
+      const input = document.getElementById('searchInput');
+      let timeout;
+      input.addEventListener('input', (e) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => renderProducts(products, e.target.value.toLowerCase().trim()), 150);
+      });
+    }
+
+    // ===== INICIALIZACIÓN =====
+    function init() {
+      document.getElementById('updateDate').textContent = formatDate(new Date());
+      document.getElementById('year').textContent = new Date().getFullYear();
+      loadProducts();
+      setInterval(loadProducts, 5 * 60 * 1000); // Auto-recarga cada 5 min
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  </script>
+</body>
+</html>
